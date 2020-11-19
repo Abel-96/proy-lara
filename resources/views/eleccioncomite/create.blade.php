@@ -7,7 +7,7 @@
 </style>
 <div class="card uper">
     <div class="card-header">
-        Agregar Casillas
+        Comité elección
     </div>
     <div class="card-body">
         @if ($errors->any())
@@ -19,12 +19,34 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{ route('casilla.store') }} " enctype="multipart/form-data">
+        <form method="post" action="{{ route('eleccioncomite.store') }} " enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 @csrf
-                <label for="ubicacion">Ubicación:</label>
-                <input type="text" class="form-control" name="ubicacion" />
+                <label for="eleccion">Eleccion:</label>
+                <select name="eleccion">
+                @foreach ($elecciones ?? '' as $eleccion)
+                <option value="{{$eleccion->id}}"> {{ $eleccion->periodo}}</option>
+                @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                @csrf
+                <label for="funcionario">Funcionario:</label>
+                <select name="funcionario">
+                @foreach ($funcionarios as $funcionario)
+                <option value="{{$funcionario->id}}"> {{ $funcionario->nombrecompleto}}</option>
+                @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                @csrf
+                <label for="rol">Rol:</label>
+                <select name="rol">
+                @foreach ($roles as $rol)
+                <option value="{{$rol->id}}"> {{ $rol->descripcion}}</option>
+                @endforeach
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>

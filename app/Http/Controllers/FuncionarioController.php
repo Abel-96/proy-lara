@@ -4,14 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
-use APP\Models\Rol;
-use APP\Models\Eleccion;
-use APP\Models\Eleccioncomite;
-
-
-
-
-class EleccioncomiteController extends Controller
+class FuncionarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +13,8 @@ class EleccioncomiteController extends Controller
      */
     public function index()
     {
-        $roles= Rol::all();
-        $elecciones = Eleccion::all();
         $funcionarios = Funcionario::all();
-
-        return view("eleccioncomite/create", 
-        compact("roles,elecciones, funcionarios"));
-       
+        return view('funcionario/list', compact('funcionarios'));
     }
 
     /**
@@ -36,7 +24,7 @@ class EleccioncomiteController extends Controller
      */
     public function create()
     {
-        return view("eleccioncomite/create");
+        return view('funcionario/create');
     }
 
     /**
@@ -47,7 +35,18 @@ class EleccioncomiteController extends Controller
      */
     public function store(Request $request)
     {
-     //
+        $request->validate([
+            'nombrecompleto' => 'required|max:200',
+            'sexo' => 'required|max:1',
+        ]);
+
+        $data = ["id" => $request->id,
+        "nombrecompleto"=>$request->nombrecompleto,
+        "sexo"=>$request->sexo];
+
+        $funcionario = Funcionario::create($data);
+        return redirect('funcionario')
+        ->with('success', $funcionario->nombrecompleto . ' guardado satisfactoriamente ...');
     }
 
     /**
@@ -69,7 +68,9 @@ class EleccioncomiteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        return view('funcionario/edit', compact('funcionario'));
+
     }
 
     /**
@@ -81,7 +82,18 @@ class EleccioncomiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombrecompleto' => 'required|max:200',
+            'sexo' => 'required|max:1',
+        ]);
+
+        $data = ["id" => $request->id,
+        "nombrecompleto"=>$request->nombrecompleto,
+        "sexo"=>$request->sexo];
+
+        Funcionario::whereId($id)->update($data);
+        return redirect('funcionario')
+        ->with('success', 'Actualizado correctamente...');
     }
 
     /**
@@ -92,6 +104,8 @@ class EleccioncomiteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return redirect('funcionario');
     }
 }
