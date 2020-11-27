@@ -7,7 +7,7 @@
 </style>
 <div class="card uper">
 	<div class="card-header">
-		Editar candidato
+		Editar Funcionario
 	</div>
 	<div class="card-body">
 		@if ($errors->any())
@@ -20,7 +20,7 @@
 		</div><br />
 		@endif
 		<form method="POST"
-		action="{{ route('candidato.update', $candidato->id) }}"
+		action="{{ route('funcionario.update', $funcionario->id) }}"
 		enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@method('PUT')
@@ -30,35 +30,28 @@
 			<input type="text"
 			class="form-control"
 			readonly="true"
-			value="{{$candidato->id}}"
+			value="{{$funcionario->id}}"
 			name="id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="nombrecompleto">Nombre completo:</label>
+			<label for="nombrecompleto">Nombre:</label>
 			<input type="text"
-			value="{{$candidato->nombrecompleto}}"
+			value="{{$funcionario->nombrecompleto}}"
 			class="form-control"
 			name="nombrecompleto"/>
 		</div>
 		<div class="form-group">
 			@csrf
 			<label for="sexo">Sexo:</label>
-			<select name="sexo" class="form-control" value="{{$candidato->sexo}}">
-				<option value="H" <?echo (($candidato->sexo=='H')?'selected':'');?> >Hombre</option>
-				<option value="M" <?echo (($candidato->sexo=='M')?'selected':'');?> >Mujer</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="foto">Elija la foto del candidato:</label>
-			<input type="file" class="form-control" name="foto">
-		</div>
-		<div class="form-group">
-			<label for="perfil">Elija el documento del perfil:</label>
-			<input type="file" class="form-control" name="perfil">
+			<input type="text"
+			value="{{$funcionario->sexo}}"
+			class="form-control"
+			maxlength="1" 
+			name="sexo"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 </div>
-</div> 
+</div>
 @endsection

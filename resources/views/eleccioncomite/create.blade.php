@@ -24,8 +24,8 @@
             <div class="form-group">
                 @csrf
                 <label for="eleccion">Eleccion:</label>
-                <select name="eleccion">
-                @foreach ($elecciones ?? '' as $eleccion)
+                <select name="eleccion_id">
+                @foreach ($elecciones as $eleccion)
                 <option value="{{$eleccion->id}}"> {{ $eleccion->periodo}}</option>
                 @endforeach
                 </select>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 @csrf
                 <label for="funcionario">Funcionario:</label>
-                <select name="funcionario">
+                <select name="funcionario_id">
                 @foreach ($funcionarios as $funcionario)
                 <option value="{{$funcionario->id}}"> {{ $funcionario->nombrecompleto}}</option>
                 @endforeach
@@ -42,7 +42,7 @@
             <div class="form-group">
                 @csrf
                 <label for="rol">Rol:</label>
-                <select name="rol">
+                <select name="rol_id">
                 @foreach ($roles as $rol)
                 <option value="{{$rol->id}}"> {{ $rol->descripcion}}</option>
                 @endforeach

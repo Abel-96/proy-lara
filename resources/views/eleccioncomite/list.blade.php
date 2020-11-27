@@ -28,12 +28,15 @@
                 <td>{{$eleccioncomite->eleccion_id}}</td>
                 <td>{{$eleccioncomite->funcionario_id}}</td>
                 <td>{{$eleccioncomite->rol_id}}</td>
-                <td><a href="{{ route('eleccioncomite.edit', $eleccioncomite->id)}}" class="btn btn-primary">Edit</a></td>
+                <td><a href="{{ route('eleccioncomite.edit', $eleccioncomite->id)}}" 
+                     class="btn btn-primary">Edit</a></td>
                 <td>
-                    <form action="{{ route('eleccioncomite.destroy', $eleccioncomite->id)}}" method="post">
+                    <form action="{{ route('eleccioncomite.destroy', $eleccioncomite->id)}}" 
+                       method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit" onclick="return confirm('Esta seguro de borrar {{$casilla->ubicacion}}')">Del</button>
+                        <button class="btn btn-danger" type="submit" 
+                        onclick="return confirm('Esta seguro de borrar ')">Del</button>
                     </form>
                 </td>
             </tr>
@@ -41,4 +44,6 @@
         </tbody>
     </table>
     <div>
+
+    
         @endsection
