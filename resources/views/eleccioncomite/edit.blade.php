@@ -19,7 +19,7 @@
             </ul>
         </div><br />
         @endif
-        <form method="post" action="{{ route('eleccioncomite.update') }} " enctype="multipart/form-data">
+        <form method="post" action="{{ route('eleccioncomite.edit') }} " enctype="multipart/form-data">
              @method('PUT')
             {{ csrf_field() }}
             <div class="form-group">

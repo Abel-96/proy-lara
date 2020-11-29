@@ -29,15 +29,17 @@ class EleccioncomiteController extends Controller
          INNER JOIN rol r ON ec.rol_id= r.id";
         $eleccioncomites = DB::select($sql);
         */
-
+       
+        /*  $eleccioncomites = Eleccioncomite::all();*/
+        
      $eleccioncomites = DB::table('eleccioncomite')
          ->join('eleccion', 'eleccioncomite.eleccion_id', '=', 'eleccion.id')
          ->join('funcionario', 'eleccioncomite.funcionario_id', '=', 'funcionario.id')
          ->join('rol', 'eleccioncomite.rol_id', '=', 'rol.id')
          ->select('eleccioncomite.id', 'eleccion.periodo as eleccion',
          'funcionario.nombrecompleto as funcionario', 'rol.descripcion as rol')
-         ->get();
-
+         ->get(); 
+       
         return view("eleccioncomite/list", 
         compact("eleccioncomites"));
        
@@ -52,7 +54,7 @@ class EleccioncomiteController extends Controller
     {
       $roles = Rol::all();
       $elecciones = Eleccion::all();
-      $funcionarios = Funcionario::alSl();
+      $funcionarios = Funcionario::all();
 
       return view("eleccioncomite/create", 
       compact("roles","elecciones", "funcionarios"));
@@ -107,7 +109,7 @@ class EleccioncomiteController extends Controller
     {
         $roles = Rol::all();
         $elecciones = Eleccion::all();
-        $funcionarios = Funcionario::alSl();
+        $funcionarios = Funcionario::all();
         $eleccioncomite = Eleccioncomite::find($id);
 
         return view("eleccioncomite/edit", 
@@ -123,7 +125,15 @@ class EleccioncomiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validacion = $request->validate([
+            'eleccion_id' => 'required|max:100',
+            'funcionario_id' => 'required|max:200',
+            'rol_id' => 'required|max:200',
+            ]);
+            
+            Eleccioncomite::whereId($id)->update($validacion);
+            return redirect('eleccioncomite')
+            ->with('success', 'Actualizado correctamente...');
     }
 
     /**
@@ -134,6 +144,8 @@ class EleccioncomiteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $eleccioncomite = Eleccioncomite::find($id);
+        $eleccioncomite->delete();
+        return redirect('eleccioncomite');
     }
 }

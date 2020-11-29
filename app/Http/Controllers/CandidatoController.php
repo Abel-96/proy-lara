@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Candidato;
+use Illuminate\Support\Facades\Validator;
 class CandidatoController extends Controller
 {
 /**
@@ -31,37 +32,41 @@ public function create()
 */
 public function store(Request $request)
 {
-	$foto="";
-	$perfil="";
-
-
-	$request->validate([
-		'nombrecompleto' => 'required|max:200',
-		'foto' => 'required|mimes:png|max:2048',
-		'sexo' => 'required|max:1',
-		'perfil' => 'required|mimes:pdf|max:2048',
-	]);
-
-	if ($request->hasFile('foto')) {
-		$foto = $request->foto->getClientOriginalName();
-		$request->foto->move(public_path('uploads'),'foto');
-	}
-
-	if ($request->hasFile('perfil')) {
-		$perfil = $request->perfil->getClientOriginalName();
-		$request->perfil->move(public_path('uploads'),'perfil');
-	}
-
-	$data = [
-		"nombrecompleto" => $request->nombrecompleto,
-		"sexo" => $request->sexo,
-		"foto" => $foto,
-		"perfil" => $perfil
-	];
-
-	$candidato = Candidato::create($data);
-	return redirect('candidato')->with('success',
-		$candidato->nombrecompleto . ' guardado satisfactoriamente ...');
+	$validacion = Validator::make($request->all(), [
+		'nombrecompleto' => 'unique:candidato|required|max:200',
+		'sexo' =>'required'
+		]);
+	   
+	   
+		if ($validacion->fails())
+		return $this->sendError("Error de validacion", $validacion->errors());
+	   
+		$fotocandidato=""; $perfilcandidato="";
+	   
+		if ($request->hasFile('foto')){
+		$foto = $request->file('foto');
+		$fotocandidato= $foto->getClientOriginalName();
+		}
+		if ($request->hasFile('perfil')){
+		$perfil = $request->file('perfil');
+		$perfilcandidato = $perfil->getClientOriginalName();
+		}
+	   
+		$campos = array(
+		'nombrecompleto' => $request->nombrecompleto,
+		'sexo' => $request->sexo,
+		'foto' => $fotocandidato,
+		'perfil' => $perfilcandidato,
+		);
+	   
+		if ($request->hasFile('foto')) $foto->move(public_path('img'), $fotocandidato);
+		if ($request->hasFile('perfil')) $perfil->move(public_path('img'), $perfilcandidato);
+	   
+		$candidato = Candidato::create($campos);
+		$resp = $this->sendResponse($candidato,
+		"Guardado...");
+		return($resp);
+	   
 
 }
 /**
