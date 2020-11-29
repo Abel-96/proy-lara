@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Voto;
 use Illuminate\Http\Request;
-
-class VotoController extends Controller
+use App\Models\Funcionario;
+class FuncionarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class VotoController extends Controller
      */
     public function index()
     {
-        $votos = Voto::all();
-        return view('voto/list', compact('votos'));
+        $funcionarios = Funcionario::all();
+        return view('voto/list', compact('voto'));
     }
 
     /**
@@ -36,7 +35,18 @@ class VotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombrecompleto' => 'required|max:200',
+            'sexo' => 'required|max:1',
+        ]);
+
+        $data = ["id" => $request->id,
+        "nombrecompleto"=>$request->nombrecompleto,
+        "sexo"=>$request->sexo];
+
+        $funcionario = Funcionario::create($data);
+        return redirect('funcionario')
+        ->with('success', $funcionario->nombrecompleto . ' guardado satisfactoriamente ...');
     }
 
     /**
@@ -58,7 +68,9 @@ class VotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        return view('voto/edit', compact('voto'));
+
     }
 
     /**
@@ -70,7 +82,18 @@ class VotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombrecompleto' => 'required|max:200',
+            'sexo' => 'required|max:1',
+        ]);
+
+        $data = ["id" => $request->id,
+        "nombrecompleto"=>$request->nombrecompleto,
+        "sexo"=>$request->sexo];
+
+        Funcionario::whereId($id)->update($data);
+        return redirect('funcionario')
+        ->with('success', 'Actualizado correctamente...');
     }
 
     /**
@@ -81,6 +104,8 @@ class VotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return redirect('voto');
     }
 }

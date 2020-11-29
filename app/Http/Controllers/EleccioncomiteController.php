@@ -55,9 +55,11 @@ class EleccioncomiteController extends Controller
       $roles = Rol::all();
       $elecciones = Eleccion::all();
       $funcionarios = Funcionario::all();
+      $eleccioncomites = Eleccioncomite::all();
+
 
       return view("eleccioncomite/create", 
-      compact("roles","elecciones", "funcionarios"));
+      compact("elecccionescomites", "roles","elecciones", "funcionarios"));
 
 
     }
@@ -113,7 +115,7 @@ class EleccioncomiteController extends Controller
         $eleccioncomite = Eleccioncomite::find($id);
 
         return view("eleccioncomite/edit", 
-        compact("eleccioncomite","roles","elecciones", "funcionarios"));
+        compact("eleccioncomite"));
     }
 
     /**

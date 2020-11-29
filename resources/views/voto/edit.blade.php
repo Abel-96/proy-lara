@@ -20,7 +20,7 @@
 		</div><br />
 		@endif
 		<form method="POST"
-		action="{{ route('funcionario.update', $funcionario->id) }}"
+		action="{{ route('voto.update', $voto->id) }}"
 		enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@method('PUT')
@@ -30,25 +30,34 @@
 			<input type="text"
 			class="form-control"
 			readonly="true"
-			value="{{$funcionario->id}}"
+			value="{{$voto->id}}"
 			name="id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="nombrecompleto">Nombre:</label>
+			<label for="eleccion_id">eleccion_id:</label>
 			<input type="text"
-			value="{{$funcionario->nombrecompleto}}"
+			value="{{$voto->eleccion_id}}"
 			class="form-control"
-			name="nombrecompleto"/>
+			name="eleccion_id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="sexo">Sexo:</label>
+			<label for="casilla_id">Casilla_id:</label>
 			<input type="text"
-			value="{{$funcionario->sexo}}"
+			value="{{$voto->casilla_id}}"
 			class="form-control"
 			maxlength="1" 
-			name="sexo"/>
+			name="casilla_id"/>
+		</div>
+		<div class="form-group">
+			@csrf
+			<label for="evidencia">evidencia:</label>
+			<input type="text"
+			value="{{$voto->evidencia}}"
+			class="form-control"
+			maxlength="1" 
+			name="evidencia"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>

@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Periosdo de eleccion</th>
+                <th>Periodo de eleccion</th>
                 <th>Funcionario</th>
                 <th>Rol</th>
                 <td colspan="2">Action</td>

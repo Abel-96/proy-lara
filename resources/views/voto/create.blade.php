@@ -7,7 +7,7 @@
 </style>
 <div class="card uper">
 	<div class="card-header">
-		Agregar Funcionario
+		Agregar Voto
 	</div>
 	<div class="card-body">
 		@if ($errors->any())
@@ -19,17 +19,22 @@
 			</ul>
 		</div><br />
 		@endif
-		<form method="post" action="{{ route('funcionario.store') }} " enctype="multipart/form-data">
+		<form method="post" action="{{ route('voto.store') }} " enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="form-group">
 				@csrf
-				<label for="nombrecompleto">Nombre de el funcionario:</label>
-				<input type="text" class="form-control" name="nombrecompleto" maxlength="200" />
+				<label for="eleccion_id">eleccion_id:</label>
+				<input type="text" class="form-control" name="eleccion_id" maxlength="200" />
 			</div>
 			<div class="form-group">
 				@csrf
-				<label for="sexo">Sexo:</label>
-				<input type="text" class="form-control" name="sexo" maxlength="1" />
+				<label for="casilla_id">casilla_id:</label>
+				<input type="text" class="form-control" name="casilla_id" maxlength="200" />
+			</div>
+			<div class="form-group">
+				@csrf
+				<label for="evidencia">evidencia:</label>
+				<input type="text" class="form-control" name="evidencia" maxlength="200" />
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>

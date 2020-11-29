@@ -21,6 +21,7 @@ class CasillaController extends Controller
     */
     public function create()
     {
+
         return view('casilla/create');
     }
     /**
