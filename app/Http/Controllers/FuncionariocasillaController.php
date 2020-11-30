@@ -3,8 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Funcionariocasilla;
 use App\Models\Funcionario;
-class FuncionarioController extends Controller
+use App\Models\Casilla;
+use App\Models\Rol;
+use App\Models\Eleccion;
+
+
+
+class FuncionariocasillaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +20,8 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::all();
-        return view('funcionario/list', compact('funcionarios'));
+        $funcionariocasillas = Funcionariocasilla::all();
+        return view('funcionariocasilla/list', compact('funcionariocasillas'));
     }
 
     /**
@@ -24,7 +31,14 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionario/create');
+
+         $funcionarios = Funcionario::all();
+         $casillas = Casilla::all();
+         $roles = Rol::all();
+         $elecciones = Eleccion::all();
+
+        return view('funcionariocasilla/create', 
+        compact("funcionarios", "casillas", "roles", "elecciones"));
     }
 
     /**
@@ -36,17 +50,21 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'rol_id' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "funcionario_id"=>$request->funcionario_id,
+        "casilla_id"=>$request->casilla_id,
+        "rol_id"=>$request->rol_id,
+        "eleccion_id"=>$request->eleccion_id];
 
-        $funcionario = Funcionario::create($data);
-        return redirect('funcionario')
-        ->with('success', $funcionario->nombrecompleto . ' guardado satisfactoriamente ...');
+        $funcionariocasilla = Funcionariocasilla::create($data);
+        return redirect('funcionariocasilla')
+        ->with('success', ' guardado satisfactoriamente ...');
     }
 
     /**
@@ -68,8 +86,8 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        $funcionario = Funcionario::find($id);
-        return view('funcionario/edit', compact('funcionario'));
+        $funcionariocasillas = Funcionariocasilla::find($id);
+        return view('funcionariocasilla/edit', compact('funcionariocasillas'));
 
     }
 
@@ -83,16 +101,20 @@ class FuncionarioController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'rol_id' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "funcionario_id"=>$request->funcionario_id,
+        "casilla_id"=>$request->casilla_id,
+        "rol_id"=>$request->rol_id,
+        "eleccion_id"=>$request->eleccion_id];
 
-        Funcionario::whereId($id)->update($data);
-        return redirect('funcionario')
+        Funcionariocasilla::whereId($id)->update($data);
+        return redirect('funcionariocasilla')
         ->with('success', 'Actualizado correctamente...');
     }
 
@@ -104,8 +126,8 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        $funcionario = Funcionario::find($id);
-        $funcionario->delete();
-        return redirect('funcionario');
+        $funcionariocasillas = Funcionariocasilla::find($id);
+        $funcionariocasillas->delete();
+        return redirect('funcionariocasilla');
     }
 }

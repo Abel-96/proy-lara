@@ -14,27 +14,27 @@
 	<table class="table table-striped">
 	<thead>
 		<tr>
-			<td>ID</td>
-			<td>Nombre del funcionario</td>
-			<td>Sexo</td>
+			<td>voto_id</td>
+			<td>candidato_id</td>
+			<td>votos</td>
 			<td colspan="2">Action</td>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($funcionarios as $funcionario)
+		@foreach($votocandidatos as $votocandidato)
 			<tr>
-				<td>{{$funcionario->id}}</td>
-				<td>{{$funcionario->nombrecompleto}}</td>
-				<td>{{$funcionario->sexo}}</td>
-				<td><a href="{{ route('funcionario.edit', $funcionario->id)}}"
+				<td>{{$votocandidato->voto_id}}</td>
+				<td>{{$votocandidato->candidato_id}}</td>
+				<td>{{$votocandidato->votos}}</td>
+				<td><a href="{{ route('votocandidato.edit', $votocandidato->id)}}"
 				class="btn btn-primary">Editar</a></td>
 				<td>
-				<form action="{{ route('funcionario.destroy', $funcionario->id)}}"
+				<form action="{{ route('votocandidato.destroy', $votocandidato->id)}}"
 				method="post">
 				@csrf
 				@method('DELETE')
 				<button class="btn btn-danger" type="submit"
-				onclick="return confirm('Esta seguro de borrar {{$funcionario->nombrecompleto}}')" >Eliminar</button>
+				onclick="return confirm('Esta seguro de borrar')" >Eliminar</button>
 				</form>
 				</td>
 			</tr>

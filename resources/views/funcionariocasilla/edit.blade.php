@@ -20,7 +20,7 @@
 		</div><br />
 		@endif
 		<form method="POST"
-		action="{{ route('funcionario.update', $funcionario->id) }}"
+		action="{{ route('funcionariocasilla.update', $funcionariocasilla->id) }}"
 		enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@method('PUT')
@@ -30,7 +30,7 @@
 			<input type="text"
 			class="form-control"
 			readonly="true"
-			value="{{$funcionario->id}}"
+			value="{{$funcionariocasilla->id}}"
 			name="id"/>
 		</div>
 		<div class="form-group">

@@ -15,7 +15,7 @@ class VotocandidatoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+     {
         $votocandidatos = Votocandidato::all();
         return view('votocandidato/list', compact('votocandidatos'));
     }
@@ -48,7 +48,7 @@ class VotocandidatoController extends Controller
             'votos' => 'required|max:200',
         ]);
 
-        $data = ["id" => $request->id,
+        $data = [
         "voto_id"=>$request->voto_id,
         "candidato_id"=>$request->candidato_id,
         "votos"=>$request->votos];
@@ -97,7 +97,7 @@ class VotocandidatoController extends Controller
             'votos' => 'required|max:200',
         ]);
 
-        $data = ["id" => $request->id,
+        $data = [
         "voto_id"=>$request->voto_id,
         "candidato_id"=>$request->candidato_id,
         "votos"=>$request->votos];

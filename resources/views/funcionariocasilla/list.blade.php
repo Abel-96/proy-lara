@@ -15,26 +15,30 @@
 	<thead>
 		<tr>
 			<td>ID</td>
-			<td>Nombre del funcionario</td>
-			<td>Sexo</td>
+			<td>funcnionario_id</td>
+			<td>casilla_id</td>
+			<td>rol_id</td>
+			<td>eleccion_id</td>
 			<td colspan="2">Action</td>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($funcionarios as $funcionario)
+		@foreach($funcionariocasillas as $funcionariocasilla)
 			<tr>
-				<td>{{$funcionario->id}}</td>
-				<td>{{$funcionario->nombrecompleto}}</td>
-				<td>{{$funcionario->sexo}}</td>
-				<td><a href="{{ route('funcionario.edit', $funcionario->id)}}"
+				<td>{{$funcionariocasilla->id}}</td>
+				<td>{{$funcionariocasilla->funcionario_id}}</td>
+				<td>{{$funcionariocasilla->casilla_id}}</td>
+				<td>{{$funcionariocasilla->rol_id}}</td>
+				<td>{{$funcionariocasilla->eleccion_id}}</td>
+				<td><a href="{{ route('funcionariocasilla.edit', $funcionariocasilla->id)}}"
 				class="btn btn-primary">Editar</a></td>
 				<td>
-				<form action="{{ route('funcionario.destroy', $funcionario->id)}}"
+				<form action="{{ route('funcionariocasilla.destroy', $funcionariocasilla->id)}}"
 				method="post">
 				@csrf
 				@method('DELETE')
 				<button class="btn btn-danger" type="submit"
-				onclick="return confirm('Esta seguro de borrar {{$funcionario->nombrecompleto}}')" >Eliminar</button>
+				onclick="return confirm('Esta seguro de borrar')" >Eliminar</button>
 				</form>
 				</td>
 			</tr>
