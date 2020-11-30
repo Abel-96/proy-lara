@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Funcionario;
-class FuncionarioController extends Controller
+use App\Models\Voto;
+use App\Models\Eleccion;
+use App\Models\Casilla;
+class VotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,8 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::all();
-        return view('voto/list', compact('voto'));
+        $votos = Voto::all();
+        return view('voto/list', compact('votos'));
     }
 
     /**
@@ -24,7 +26,10 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('voto/create');
+         $elecciones = Eleccion::all();
+         $casillas = Casilla::all();
+        return view('voto/create',   
+        compact("elecciones", "casillas"));
     }
 
     /**
@@ -36,17 +41,19 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'evidencia' => 'required|max:200',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "eleccion_id"=>$request->eleccion_id,
+        "casilla_id"=>$request->casilla_id,
+        "evidencia"=>$request->evidencia];
 
-        $funcionario = Funcionario::create($data);
-        return redirect('funcionario')
-        ->with('success', $funcionario->nombrecompleto . ' guardado satisfactoriamente ...');
+        $voto = Voto::create($data);
+        return redirect('voto')
+        ->with('success',' guardado satisfactoriamente ...');
     }
 
     /**
@@ -68,7 +75,7 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        $funcionario = Funcionario::find($id);
+        $voto = Voto::find($id);
         return view('voto/edit', compact('voto'));
 
     }
@@ -83,16 +90,18 @@ class FuncionarioController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'evidencia' => 'required|max:200',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "eleccion_id"=>$request->eleccion_id,
+        "casilla__id"=>$request->casilla_id,
+        "evidencia"=>$request->evidencia];
 
-        Funcionario::whereId($id)->update($data);
-        return redirect('funcionario')
+        Voto::whereId($id)->update($data);
+        return redirect('votos')
         ->with('success', 'Actualizado correctamente...');
     }
 
@@ -104,8 +113,8 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        $funcionario = Funcionario::find($id);
-        $funcionario->delete();
+        $voto = Voto::find($id);
+        $voto->delete();
         return redirect('voto');
     }
 }

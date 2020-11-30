@@ -55,11 +55,8 @@ class EleccioncomiteController extends Controller
       $roles = Rol::all();
       $elecciones = Eleccion::all();
       $funcionarios = Funcionario::all();
-      $eleccioncomites = Eleccioncomite::all();
-
-
       return view("eleccioncomite/create", 
-      compact("elecccionescomites", "roles","elecciones", "funcionarios"));
+      compact("roles","elecciones", "funcionarios"));
 
 
     }

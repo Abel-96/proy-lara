@@ -22,15 +22,23 @@
 		<form method="post" action="{{ route('voto.store') }} " enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="form-group">
-				@csrf
-				<label for="eleccion_id">eleccion_id:</label>
-				<input type="text" class="form-control" name="eleccion_id" maxlength="200" />
-			</div>
+                @csrf
+                <label for="eleccion_id">eleccion_id:</label>
+                <select name="eleccion_id">
+                @foreach ($elecciones as $eleccion)
+                <option value="{{$eleccion->id}}"> {{ $eleccion->periodo}}</option>
+                @endforeach
+                </select>
+            </div>
 			<div class="form-group">
-				@csrf
-				<label for="casilla_id">casilla_id:</label>
-				<input type="text" class="form-control" name="casilla_id" maxlength="200" />
-			</div>
+                @csrf
+                <label for="casilla_id">casilla_id:</label>
+                <select name="casilla_id">
+                @foreach ($casillas as $casilla)
+                <option value="{{$casilla->id}}"> {{ $casilla->ubicacion}}</option>
+                @endforeach
+                </select>
+            </div>
 			<div class="form-group">
 				@csrf
 				<label for="evidencia">evidencia:</label>

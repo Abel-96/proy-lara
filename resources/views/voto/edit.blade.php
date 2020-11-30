@@ -56,7 +56,7 @@
 			<input type="text"
 			value="{{$voto->evidencia}}"
 			class="form-control"
-			maxlength="1" 
+			maxlength="200" 
 			name="evidencia"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
