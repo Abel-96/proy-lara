@@ -7,7 +7,7 @@
 </style>
 <div class="card uper">
 	<div class="card-header">
-		Agregar Funcionario
+		Agregar Imeiautorizado
 	</div>
 	<div class="card-body">
 		@if ($errors->any())
@@ -19,17 +19,39 @@
 			</ul>
 		</div><br />
 		@endif
-		<form method="post" action="{{ route('funcionario.store') }} " enctype="multipart/form-data">
+		<form method="post" action="{{ route('imeiautorizado.store') }} " enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="form-group">
-				@csrf
-				<label for="nombrecompleto">Nombre de el funcionario:</label>
-				<input type="text" class="form-control" name="nombrecompleto" maxlength="200" />
+                @csrf
+                <label for="funcionario_id">Funcionario_id:</label>
+                <select name="funcionario_id">
+                @foreach ($funcionarios as $funcionario)
+                <option value="{{$funcionario->id}}"> {{ $funcionario->nombrecompleto}}</option>
+                @endforeach
+                </select>
 			</div>
 			<div class="form-group">
+                @csrf
+                <label for="eleccion_id">eleccion_id:</label>
+                <select name="eleccion_id">
+                @foreach ($elecciones as $eleccion)
+                <option value="{{$eleccion->id}}"> {{ $eleccion->periodo}}</option>
+                @endforeach
+                </select>
+			</div>
+			<div class="form-group">
+                @csrf
+                <label for="casilla_id">casilla_id:</label>
+                <select name="casilla_id">
+                @foreach ($casillas as $casilla)
+                <option value="{{$casilla->id}}"> {{ $casilla->ubicacion}}</option>
+                @endforeach
+                </select>
+            </div>
+			<div class="form-group">
 				@csrf
-				<label for="sexo">Sexo:</label>
-				<input type="text" class="form-control" name="sexo" maxlength="1" />
+				<label for="imei">imei:</label>
+				<input type="text" class="form-control" name="imei" maxlength="200" />
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Imeiautorizado;
 use App\Models\Funcionario;
-class FuncionarioController extends Controller
+use App\Models\Eleccion;
+use App\Models\Casilla;
+class ImeiautorizadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +16,8 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::all();
-        return view('funcionario/list', compact('funcionarios'));
+        $imeiautorizados = Imeiautorizado::all();
+        return view('imeiautorizado/list', compact('imeiautorizados'));
     }
 
     /**
@@ -24,7 +27,11 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionario/create');
+        $funcionarios = Funcionario::all();
+        $elecciones = Eleccion::all();
+        $casillas = Casilla::all();
+        return view('imeiautorizado/create', 
+        compact("funcionarios","elecciones", "casillas"));
     }
 
     /**
@@ -36,17 +43,21 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'imei' => 'required|max:200',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "funcionario_id"=>$request->funcionario_id,
+        "eleccion_id"=>$request->eleccion_id,
+        "casilla_id"=>$request->casilla_id,
+        "imei"=>$request->imei];
 
-        $funcionario = Funcionario::create($data);
-        return redirect('funcionario')
-        ->with('success', $funcionario->nombrecompleto . ' guardado satisfactoriamente ...');
+        $imeiautorizado = Imeiautorizado::create($data);
+        return redirect('imeiautorizado')
+        ->with('success', ' guardado satisfactoriamente ...');
     }
 
     /**
@@ -68,8 +79,8 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        $funcionario = Funcionario::find($id);
-        return view('funcionario/edit', compact('funcionario'));
+        $imeiautorizado = Imeiautorizado::find($id);
+        return view('imeiautorizado/edit', compact('imeiautorizado'));
 
     }
 
@@ -83,16 +94,20 @@ class FuncionarioController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombrecompleto' => 'required|max:200',
-            'sexo' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'eleccion_id' => 'required|max:1',
+            'casilla_id' => 'required|max:1',
+            'imei' => 'required|max:200',
         ]);
 
         $data = ["id" => $request->id,
-        "nombrecompleto"=>$request->nombrecompleto,
-        "sexo"=>$request->sexo];
+        "funcionario_id"=>$request->funcionario_id,
+        "eleccion_id"=>$request->eleccion_id,
+        "casilla_id"=>$request->casilla_id,
+        "imei"=>$request->imei];
 
-        Funcionario::whereId($id)->update($data);
-        return redirect('funcionario')
+        Imeiautorizado::whereId($id)->update($data);
+        return redirect('imeiautorizado')
         ->with('success', 'Actualizado correctamente...');
     }
 
@@ -104,8 +119,8 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        $funcionario = Funcionario::find($id);
-        $funcionario->delete();
-        return redirect('funcionario');
+        $imeiautorizado = Imeiautorizado::find($id);
+        $imeiautorizado->delete();
+        return redirect('imeiautorizado');
     }
 }

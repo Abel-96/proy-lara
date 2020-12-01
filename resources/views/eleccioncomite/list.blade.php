@@ -25,9 +25,9 @@
             @foreach($eleccioncomites as $eleccioncomite)
             <tr>
                 <td>{{$eleccioncomite->id}}</td>
-                <td>{{$eleccioncomite->eleccion}}</td>
-                <td>{{$eleccioncomite->funcionario}}</td>
-                <td>{{$eleccioncomite->rol}}</td>
+                <td>{{$eleccioncomite->eleccion_id}}</td>
+                <td>{{$eleccioncomite->funcionario_id}}</td>
+                <td>{{$eleccioncomite->rol_id}}</td>
                 <td><a href="{{ route('eleccioncomite.edit', $eleccioncomite->id)}}" 
                      class="btn btn-primary">Edit</a></td>
                 <td>

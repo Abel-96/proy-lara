@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Funcionario;
-use APP\Models\Rol;
-use APP\Models\Eleccion;
-use APP\Models\Eleccioncomite;
+use App\Models\Eleccioncomite;
 use Illuminate\Support\Facades\DB;
-
-
-
+use App\Models\Rol;
+use App\Models\Eleccion;
+use App\Models\Funcionario;
 
 class EleccioncomiteController extends Controller
 {
@@ -21,7 +18,7 @@ class EleccioncomiteController extends Controller
      */
     public function index()
     {
-           /*
+       /*
          $sql = "SELECT ec.id, e.periodo as eleccion, f.nombrecompleto as funcionario,
          r.descripcion as rol
          FROM eleccioncomite ec  INNER JOIN eleccion e ON ec.eleccion_id=e.id
@@ -33,16 +30,15 @@ class EleccioncomiteController extends Controller
         /*  $eleccioncomites = Eleccioncomite::all();*/
         
      $eleccioncomites = DB::table('eleccioncomite')
-         ->join('eleccion', 'eleccioncomite.eleccion_id', '=', 'eleccion.id')
-         ->join('funcionario', 'eleccioncomite.funcionario_id', '=', 'funcionario.id')
-         ->join('rol', 'eleccioncomite.rol_id', '=', 'rol.id')
-         ->select('eleccioncomite.id', 'eleccion.periodo as eleccion',
-         'funcionario.nombrecompleto as funcionario', 'rol.descripcion as rol')
-         ->get(); 
-       
-        return view("eleccioncomite/list", 
-        compact("eleccioncomites"));
-       
+     ->join('eleccion', 'eleccioncomite.eleccion_id', '=', 'eleccion.id')
+     ->join('funcionario', 'eleccioncomite.funcionario_id', '=', 'funcionario.id')
+     ->join('rol', 'eleccioncomite.rol_id', '=', 'rol.id')
+     ->select('eleccioncomite.id', 'eleccion.periodo as eleccion',
+     'funcionario.nombrecompleto as funcionario', 'rol.descripcion as rol')
+     ->get(); 
+   
+    return view("eleccioncomite/list", 
+    compact("eleccioncomites"));
     }
 
     /**
@@ -57,8 +53,6 @@ class EleccioncomiteController extends Controller
       $funcionarios = Funcionario::all();
       return view("eleccioncomite/create", 
       compact("roles","elecciones", "funcionarios"));
-
-
     }
 
     /**
@@ -69,22 +63,20 @@ class EleccioncomiteController extends Controller
      */
     public function store(Request $request)
     {
-     $request->validate([
-         'rol_id' => 'required |integer',
-         'funcionario_id' => 'required |integer',
-         'eleccion_id' => 'required |integer'
-     ]);
-     $data = [
-         "rol_id" => $request->rol_id,
-         "funcionario_id" => $request->funcionario_id,
-         "eleccion_id" => $request->eleccion_id
+        $request->validate([
+            'eleccion_id' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'rol_id' => 'required|max:1',
+        ]);
 
-     ];
+        $data = ["id" => $request->id,
+        "eleccion_id"=>$request->eleccion_id,
+        "funcionario_id"=>$request->funcionario_id,
+        "rol_id"=>$request->rol_id];
 
      Eleccioncomite::create($data);
      return redirect('eleccioncomite')->with('succes',
      'guardado satisfactoriamente ....');
-
     }
 
     /**
@@ -106,13 +98,9 @@ class EleccioncomiteController extends Controller
      */
     public function edit($id)
     {
-        $roles = Rol::all();
-        $elecciones = Eleccion::all();
-        $funcionarios = Funcionario::all();
         $eleccioncomite = Eleccioncomite::find($id);
+        return view('eleccioncomite/edit', compact('eleccioncomite'));
 
-        return view("eleccioncomite/edit", 
-        compact("eleccioncomite"));
     }
 
     /**
@@ -124,15 +112,20 @@ class EleccioncomiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validacion = $request->validate([
-            'eleccion_id' => 'required|max:100',
-            'funcionario_id' => 'required|max:200',
-            'rol_id' => 'required|max:200',
-            ]);
-            
-            Eleccioncomite::whereId($id)->update($validacion);
-            return redirect('eleccioncomite')
-            ->with('success', 'Actualizado correctamente...');
+        $request->validate([
+            'eleccion_id' => 'required|max:1',
+            'funcionario_id' => 'required|max:1',
+            'rol_id' => 'required|max:1',
+        ]);
+
+        $data = ["id" => $request->id,
+        "eleccion_id"=>$request->eleccion_id,
+        "funcionario_id"=>$request->funcionario_id,
+        "rol_id"=>$request->rol_id];
+
+        Eleccioncomite::whereId($id)->update($data);
+        return redirect('eleccioncomite')
+        ->with('success', 'Actualizado correctamente...');
     }
 
     /**
