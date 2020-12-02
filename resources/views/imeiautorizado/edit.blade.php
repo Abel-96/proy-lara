@@ -7,7 +7,7 @@
 </style>
 <div class="card uper">
 	<div class="card-header">
-		Editar Funcionario
+		Editar Imeiautorizado
 	</div>
 	<div class="card-body">
 		@if ($errors->any())
@@ -20,7 +20,7 @@
 		</div><br />
 		@endif
 		<form method="POST"
-		action="{{ route('funcionario.update', $funcionario->id) }}"
+		action="{{ route('imeiautorizado.update', $imeiautorizado->id) }}"
 		enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@method('PUT')
@@ -30,25 +30,32 @@
 			<input type="text"
 			class="form-control"
 			readonly="true"
-			value="{{$funcionario->id}}"
+			value="{{$imeiautorizado->id}}"
 			name="id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="nombrecompleto">Nombre:</label>
+			<label for="funcionario_Id">funcionario_id:</label>
 			<input type="text"
-			value="{{$funcionario->nombrecompleto}}"
+			value="{{$imeiautorizado->funcionario_id}}"
 			class="form-control"
-			name="nombrecompleto"/>
+			name="funcionario_id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="sexo">Sexo:</label>
+			<label for="eleccion_id">eleccion_id:</label>
 			<input type="text"
-			value="{{$funcionario->sexo}}"
+			value="{{$imeiautorizado->eleccion_id}}"
 			class="form-control"
-			maxlength="1" 
-			name="sexo"/>
+			name="eleccion_id"/>
+		</div>
+		<div class="form-group">
+			@csrf
+			<label for="casilla_id">casilla_id:</label>
+			<input type="text"
+			value="{{$imeiautorizado->casilla_id}}"
+			class="form-control"
+			name="casilla_id"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>

@@ -35,20 +35,35 @@
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="nombrecompleto">Nombre:</label>
+			<label for="funcionario_id">funcionario_id:</label>
 			<input type="text"
-			value="{{$funcionario->nombrecompleto}}"
+			value="{{$funcionariocasilla->funcionario_id}}"
 			class="form-control"
-			name="nombrecompleto"/>
+			name="funcionario_id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="sexo">Sexo:</label>
+			<label for="casilla_id">casilla_id:</label>
 			<input type="text"
-			value="{{$funcionario->sexo}}"
+			value="{{$funcionariocasilla->casilla_id}}"
 			class="form-control"
-			maxlength="1" 
-			name="sexo"/>
+			name="casilla_id"/>
+		</div>
+		<div class="form-group">
+			@csrf
+			<label for="rol_id">rol_id:</label>
+			<input type="text"
+			value="{{$funcionariocasilla->rol_id}}"
+			class="form-control"
+			name="rol_id"/>
+		</div>
+		<div class="form-group">
+			@csrf
+			<label for="eleccion_id">eleccion_id:</label>
+			<input type="text"
+			value="{{$funcionariocasilla->eleccion_id}}"
+			class="form-control"
+			name="eleccion_id"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>

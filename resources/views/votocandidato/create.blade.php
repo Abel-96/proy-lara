@@ -41,8 +41,8 @@
             </div>
 			<div class="form-group">
 				@csrf
-				<label for="sexo">votos:</label>
-				<input type="text" class="form-control" name="votos" maxlength="200" />
+				<label for="votos">votos:</label>
+				<input type="number" class="form-control" name="votos" min="1" max="100"/>
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>

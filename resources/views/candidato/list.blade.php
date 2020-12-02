@@ -22,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($candidato as $candidato)
+		@foreach($candidatos as $candidato)
 			<tr>
 				<td>{{$candidato->id}}</td>
 				<td>{{$candidato->nombrecompleto}}</td>

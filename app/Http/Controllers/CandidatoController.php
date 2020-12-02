@@ -12,8 +12,8 @@ class CandidatoController extends Controller
 */
 public function index()
 {
-	$candidato = Candidato::all();
-	return view('candidato/list', compact('candidato'));
+	$candidatos = Candidato::all();
+	return view('candidato/list', compact('candidatos'));
 }
 /**
 * Show the form for creating a new resource.

@@ -20,7 +20,7 @@
 		</div><br />
 		@endif
 		<form method="POST"
-		action="{{ route('funcionario.update', $funcionario->id) }}"
+		action="{{ route('votocandidato.update', $votocandidato->id) }}"
 		enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@method('PUT')
@@ -34,22 +34,28 @@
 			name="id"/>
 		</div>
 		<div class="form-group">
-			@csrf
-			<label for="nombrecompleto">Nombre:</label>
-			<input type="text"
-			value="{{$funcionario->nombrecompleto}}"
-			class="form-control"
-			name="nombrecompleto"/>
-		</div>
-		<div class="form-group">
-			@csrf
-			<label for="sexo">Sexo:</label>
-			<input type="text"
-			value="{{$funcionario->sexo}}"
-			class="form-control"
-			maxlength="1" 
-			name="sexo"/>
-		</div>
+                @csrf
+                <label for="voto_id">voto_id:</label>
+                <select name="voto_id">
+                @foreach ($votos as $voto)
+                <option value="{{$voto->id}}"> {{$voto->id}}</option>
+                @endforeach
+                </select>
+			</div>
+			<div class="form-group">
+                @csrf
+                <label for="candidato_id">candidato_id:</label>
+                <select name="candidato_id">
+                @foreach ($candidatos as $candidato)
+                <option value="{{$candidato->id}}"> {{ $candidato->id}}</option>
+                @endforeach
+                </select>
+            </div>
+			<div class="form-group">
+				@csrf
+				<label for="votos">votos:</label>
+				<input type="number" class="form-control" name="votos" min="1" max="100"/>
+			</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 </div>
