@@ -63,9 +63,12 @@ public function store(Request $request)
 		if ($request->hasFile('perfil')) $perfil->move(public_path('img'), $perfilcandidato);
 	   
 		$candidato = Candidato::create($campos);
-		$resp = $this->sendResponse($candidato,
+		return redirect('candidato')->with('success', ' guardado satisfactoriamente ...');
+		 /*$resp = $this->sendResponse($candidato,
 		"Guardado...");
-		return($resp);
+	  	return($resp); */
+	  
+		
 	   
 
 }
