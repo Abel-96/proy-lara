@@ -7,6 +7,7 @@ use App\Models\Imeiautorizado;
 use App\Models\Funcionario;
 use App\Models\Eleccion;
 use App\Models\Casilla;
+use Illuminate\Support\Facades\DB;
 class ImeiautorizadoController extends Controller
 {
     /**
@@ -16,8 +17,21 @@ class ImeiautorizadoController extends Controller
      */
     public function index()
     {
+        /*
         $imeiautorizados = Imeiautorizado::all();
         return view('imeiautorizado/list', compact('imeiautorizados'));
+        */
+        $imeiautorizados = DB::table('imeiautorizado')
+        ->join('funcionario', 'imeiautorizado.funcionario_id', '=', 'funcionario.id')
+        ->join('eleccion', 'imeiautorizado.eleccion_id', '=', 'eleccion.id')
+        ->join('casilla', 'imeiautorizado.casilla_id', '=', 'casilla.id')
+       
+        ->select('imeiautorizado.id', 'funcionario.nombrecompleto as funcionario',
+       'eleccion.periodo as eleccion', 'casilla.ubicacion as casilla', 'imeiautorizado.imei')
+        ->get(); 
+      
+       return view("imeiautorizado/list", 
+       compact("imeiautorizados"));
     }
 
     /**

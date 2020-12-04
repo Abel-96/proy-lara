@@ -15,8 +15,8 @@
 	<thead>
 		<tr>
 			<td>ID</td>
-			<td>eleccion_id</td>
-			<td>casilla_id</td>
+			<td>Periodo</td>
+			<td>Ubicacion</td>
 			<td>evidencia</td>
 			<td colspan="2">Action</td>
 		</tr>
@@ -25,8 +25,8 @@
 		@foreach($votos as $voto)
 			<tr>
 				<td>{{$voto->id}}</td>
-				<td>{{$voto->eleccion_id}}</td>
-				<td>{{$voto->casilla_id}}</td>
+				<td>{{$voto->eleccion}}</td>
+				<td>{{$voto->casilla}}</td>
 				<td>{{$voto->evidencia}}</td>
 				<td><a href="{{ route('voto.edit', $voto->id)}}"
 				class="btn btn-primary">Editar</a></td>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Voto;
 use App\Models\Eleccion;
 use App\Models\Casilla;
+use Illuminate\Support\Facades\DB;
+
 class VotoController extends Controller
 {
     /**
@@ -15,8 +17,19 @@ class VotoController extends Controller
      */
     public function index()
     {
-        $votos = Voto::all();
-        return view('voto/list', compact('votos'));
+        /* $votos = Voto::all();
+           return view('voto/list', compact('votos'));
+        */
+        $votos = DB::table('voto')
+        ->join('eleccion', 'voto.eleccion_id', '=', 'eleccion.id')
+        ->join('casilla', 'voto.casilla_id', '=', 'casilla.id')
+       
+        ->select('voto.id', 'eleccion.periodo as eleccion',
+        'casilla.ubicacion as casilla', 'voto.evidencia')
+        ->get(); 
+      
+       return view("voto/list", 
+       compact("votos"));
     }
 
     /**
@@ -26,10 +39,12 @@ class VotoController extends Controller
      */
     public function create()
     {
-         $elecciones = Eleccion::all();
-         $casillas = Casilla::all();
-        return view('voto/create',   
-        compact("elecciones", "casillas"));
+        $elecciones = Eleccion::all();
+        $casillas = Casilla::all();
+        return view(
+            'voto/create',
+            compact("elecciones", "casillas")
+        );
     }
 
     /**
@@ -46,14 +61,16 @@ class VotoController extends Controller
             'evidencia' => 'required|max:200',
         ]);
 
-        $data = ["id" => $request->id,
-        "eleccion_id"=>$request->eleccion_id,
-        "casilla_id"=>$request->casilla_id,
-        "evidencia"=>$request->evidencia];
+        $data = [
+            "id" => $request->id,
+            "eleccion_id" => $request->eleccion_id,
+            "casilla_id" => $request->casilla_id,
+            "evidencia" => $request->evidencia
+        ];
 
         $voto = Voto::create($data);
         return redirect('voto')
-        ->with('success',' guardado satisfactoriamente ...');
+            ->with('success', ' guardado satisfactoriamente ...');
     }
 
     /**
@@ -77,7 +94,6 @@ class VotoController extends Controller
     {
         $voto = Voto::find($id);
         return view('voto/edit', compact('voto'));
-
     }
 
     /**
@@ -95,14 +111,16 @@ class VotoController extends Controller
             'evidencia' => 'required|max:200',
         ]);
 
-        $data = ["id" => $request->id,
-        "eleccion_id"=>$request->eleccion_id,
-        "casilla__id"=>$request->casilla_id,
-        "evidencia"=>$request->evidencia];
+        $data = [
+            "id" => $request->id,
+            "eleccion_id" => $request->eleccion_id,
+            "casilla__id" => $request->casilla_id,
+            "evidencia" => $request->evidencia
+        ];
 
         Voto::whereId($id)->update($data);
-        return redirect('votos')
-        ->with('success', 'Actualizado correctamente...');
+        return redirect('voto')
+            ->with('success', 'Actualizado correctamente...');
     }
 
     /**

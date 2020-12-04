@@ -8,6 +8,7 @@ use App\Models\Funcionario;
 use App\Models\Casilla;
 use App\Models\Rol;
 use App\Models\Eleccion;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -20,8 +21,23 @@ class FuncionariocasillaController extends Controller
      */
     public function index()
     {
+        /*
         $funcionariocasillas = Funcionariocasilla::all();
         return view('funcionariocasilla/list', compact('funcionariocasillas'));
+        */
+        $funcionariocasillas = DB::table('funcionariocasilla')
+        ->join('funcionario', 'funcionariocasilla.funcionario_id', '=', 'funcionario.id')
+        ->join('casilla', 'funcionariocasilla.casilla_id', '=', 'casilla.id')
+        ->join('rol', 'funcionariocasilla.rol_id', '=', 'rol.id')
+        ->join('eleccion', 'funcionariocasilla.eleccion_id', '=', 'eleccion.id')
+       
+        ->select('funcionariocasilla.id', 'funcionario.nombrecompleto as funcionario',
+        'casilla.ubicacion as casilla', 'rol.descripcion as rol','eleccion.periodo as eleccion')
+        ->get(); 
+      
+       return view("funcionariocasilla/list", 
+       compact("funcionariocasillas"));
+        
     }
 
     /**

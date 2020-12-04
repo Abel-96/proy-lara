@@ -15,9 +15,9 @@
 	<thead>
 		<tr>
 			<td>ID</td>
-			<td>funcionario_id</td>
-			<td>eleccion_id</td>
-			<td>casilla_id</td>
+			<td>Nombre del funcionario</td>
+			<td>Perido</td>
+			<td>Ubicacion</td>
 			<td>imei</td>
 			<td colspan="2">Action</td>
 		</tr>
@@ -26,9 +26,9 @@
 		@foreach($imeiautorizados as $imeiautorizado)
 			<tr>
 				<td>{{$imeiautorizado->id}}</td>
-				<td>{{$imeiautorizado->funcionario_id}}</td>
-				<td>{{$imeiautorizado->eleccion_id}}</td>
-				<td>{{$imeiautorizado->casilla_id}}</td>
+				<td>{{$imeiautorizado->funcionario}}</td>
+				<td>{{$imeiautorizado->eleccion}}</td>
+				<td>{{$imeiautorizado->casilla}}</td>
 				<td>{{$imeiautorizado->imei}}</td>
 				<td><a href="{{ route('imeiautorizado.edit', $imeiautorizado->id)}}"
 				class="btn btn-primary">Editar</a></td>

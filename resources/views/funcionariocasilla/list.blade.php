@@ -15,10 +15,10 @@
 	<thead>
 		<tr>
 			<td>ID</td>
-			<td>funcnionario_id</td>
-			<td>casilla_id</td>
-			<td>rol_id</td>
-			<td>eleccion_id</td>
+			<td>Nombre del funcionario</td>
+			<td>Ubicacion</td>
+			<td>Descripcion</td>
+			<td>Periodo</td>
 			<td colspan="2">Action</td>
 		</tr>
 	</thead>
@@ -26,10 +26,10 @@
 		@foreach($funcionariocasillas as $funcionariocasilla)
 			<tr>
 				<td>{{$funcionariocasilla->id}}</td>
-				<td>{{$funcionariocasilla->funcionario_id}}</td>
-				<td>{{$funcionariocasilla->casilla_id}}</td>
-				<td>{{$funcionariocasilla->rol_id}}</td>
-				<td>{{$funcionariocasilla->eleccion_id}}</td>
+				<td>{{$funcionariocasilla->funcionario}}</td>
+				<td>{{$funcionariocasilla->casilla}}</td>
+				<td>{{$funcionariocasilla->rol}}</td>
+				<td>{{$funcionariocasilla->eleccion}}</td>
 				<td><a href="{{ route('funcionariocasilla.edit', $funcionariocasilla->id)}}"
 				class="btn btn-primary">Editar</a></td>
 				<td>
