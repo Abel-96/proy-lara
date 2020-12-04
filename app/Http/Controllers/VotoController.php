@@ -79,6 +79,7 @@ class VotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function show($id)
     {
         //
@@ -114,7 +115,7 @@ class VotoController extends Controller
         $data = [
             "id" => $request->id,
             "eleccion_id" => $request->eleccion_id,
-            "casilla__id" => $request->casilla_id,
+            "casilla_id" => $request->casilla_id,
             "evidencia" => $request->evidencia
         ];
 

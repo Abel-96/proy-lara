@@ -39,11 +39,12 @@
 			<input type="text"
 			value="{{$voto->eleccion_id}}"
 			class="form-control"
+			maxlength="1" 
 			name="eleccion_id"/>
 		</div>
 		<div class="form-group">
 			@csrf
-			<label for="casilla_id">Casilla_id:</label>
+			<label for="casilla_id">casilla_id:</label>
 			<input type="text"
 			value="{{$voto->casilla_id}}"
 			class="form-control"
