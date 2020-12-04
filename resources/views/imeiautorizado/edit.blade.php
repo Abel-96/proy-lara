@@ -57,6 +57,15 @@
 			class="form-control"
 			name="casilla_id"/>
 		</div>
+		<div class="form-group">
+			@csrf
+			<label for="imei">imei:</label>
+			<input type="text"
+			value="{{$imeiautorizado->imei}}"
+			class="form-control"
+			maxlength="200" 
+			name="imei"/>
+		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 </div>

@@ -102,8 +102,8 @@ class FuncionariocasillaController extends Controller
      */
     public function edit($id)
     {
-        $funcionariocasillas = Funcionariocasilla::find($id);
-        return view('funcionariocasilla/edit', compact('funcionariocasillas'));
+        $funcionariocasilla = Funcionariocasilla::find($id);
+        return view('funcionariocasilla/edit', compact('funcionariocasilla'));
 
     }
 
