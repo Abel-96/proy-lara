@@ -23,8 +23,8 @@
 	<tbody>
 		@foreach($votocandidatos as $votocandidato)
 			<tr>
-				<td>{{$votocandidato->voto_id}}</td>
-				<td>{{$votocandidato->candidato_id}}</td>
+				<td>{{$votocandidato->voto}}</td>
+				<td>{{$votocandidato->candidato}}</td>
 				<td>{{$votocandidato->votos}}</td>
 				<td><a href="{{ route('votocandidato.edit', $votocandidato->id)}}"
 				class="btn btn-primary">Editar</a></td>

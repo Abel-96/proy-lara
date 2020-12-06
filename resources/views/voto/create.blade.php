@@ -42,7 +42,7 @@
 			<div class="form-group">
 				@csrf
 				<label for="evidencia">evidencia:</label>
-				<input type="text" class="form-control" name="evidencia" maxlength="200" />
+				<input type="file" name="evidencia"  accept="application/pdf" >
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>
