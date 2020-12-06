@@ -54,10 +54,10 @@
 		<div class="form-group">
 			@csrf
 			<label for="evidencia">evidencia:</label>
-			<input type="file"
+			<input type="text"
 			value="{{$voto->evidencia}}"
 			class="form-control"
-			accept="application/pdf" 
+			maxlength="200" 
 			name="evidencia"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>
