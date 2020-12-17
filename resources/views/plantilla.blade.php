@@ -14,6 +14,8 @@
         @yield('content')
     </div>
     <script src="{{ asset('js/app.js') }}" type="text/js"></script>
+    <script src="{{ asset('js/casilla.js') }}" type="text/js"></script>
 </body>
 
 </html>
+@yield('page-script')
