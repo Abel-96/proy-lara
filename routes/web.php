@@ -41,3 +41,9 @@ Route::resource('voto', VotoController::class);
 Route::resource('votocandidato', VotocandidatoController::class);
 Route::resource('funcionariocasilla', FuncionariocasillaController::class);
 Route::resource('imeiautorizado', ImeiautorizadoController::class);
+
+
+Route::post('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
+
+
+
