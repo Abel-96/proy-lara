@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rol;
-
+use Barryvdh\DomPDF\Facade as PDF; 
 class RolController extends Controller
 {
     /**
@@ -12,6 +12,14 @@ class RolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $roles = Rol::all();
+        $pdf = PDF::loadView('rol/list', ['casillas'=>$roles]);
+        return $pdf->save(storage_path('app/public/') . 'roles.pdf');
+
+
+    }
     public function index()
     {
         $roles = Rol::all();

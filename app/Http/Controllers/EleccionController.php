@@ -12,6 +12,14 @@ class EleccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $elecciones = Eleccion::all();
+        $pdf = PDF::loadView('eleccion/list', ['eleccion'=>$elecciones]);
+        return $pdf->save(storage_path('app/public/') . 'elecciones.pdf');
+
+
+    }
     public function index()
     {
         $elecciones = Eleccion::all();

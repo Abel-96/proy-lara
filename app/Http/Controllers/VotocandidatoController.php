@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Votocandidato;
 use App\Models\Voto;
 use App\Models\Candidato;
-
+use Barryvdh\DomPDF\Facade as PDF; 
 class VotocandidatoController extends Controller
 {
     /**
@@ -14,6 +14,14 @@ class VotocandidatoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $votocandidatos = Votocandidato::all();
+        $pdf = PDF::loadView('votocandidato/list', ['casillas'=>$votocandidatos]);
+        return $pdf->save(storage_path('app/public/') . 'votocandidatos.pdf');
+
+
+    }
     public function index()
      {
         $votocandidatos = Votocandidato::all();

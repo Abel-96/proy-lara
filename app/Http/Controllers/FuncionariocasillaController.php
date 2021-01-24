@@ -9,7 +9,7 @@ use App\Models\Casilla;
 use App\Models\Rol;
 use App\Models\Eleccion;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class FuncionariocasillaController extends Controller
@@ -19,6 +19,14 @@ class FuncionariocasillaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $funcionariocasillas= Casilla::all();
+        $pdf = PDF::loadView('funcionariocasilla/list', ['funcionariocasillas'=>$funcionariocasillas]);
+        return $pdf->save(storage_path('app/public/') . 'funcionariocasillas.pdf');
+
+
+    }
     public function index()
     {
         /*

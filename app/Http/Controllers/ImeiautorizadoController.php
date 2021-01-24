@@ -8,6 +8,7 @@ use App\Models\Funcionario;
 use App\Models\Eleccion;
 use App\Models\Casilla;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF; 
 class ImeiautorizadoController extends Controller
 {
     /**
@@ -15,6 +16,14 @@ class ImeiautorizadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $imeiautorizados = Imeiautorizado::all();
+        $pdf = PDF::loadView('imeiautorizados/list', ['imeiautorizados'=>$imeiautorizados]);
+        return $pdf->save(storage_path('app/public/') . 'imeiautorizados.pdf');
+
+
+    }
     public function index()
     {
         /*

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
+use Barryvdh\DomPDF\Facade as PDF;
 class FuncionarioController extends Controller
 {
     /**
@@ -11,6 +12,14 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $funcionarios = Funcionario::all();
+        $pdf = PDF::loadView('funcionario/list', ['funcionarios'=>$funcionarios]);
+        return $pdf->save(storage_path('app/public/') . 'funcionarios.pdf');
+
+
+    }
     public function index()
     {
         $funcionarios = Funcionario::all();

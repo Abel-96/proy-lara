@@ -7,7 +7,7 @@ use App\Models\Voto;
 use App\Models\Eleccion;
 use App\Models\Casilla;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade as PDF; 
 class VotoController extends Controller
 {
     /**
@@ -15,6 +15,14 @@ class VotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $votos = Voto::all();
+        $pdf = PDF::loadView('voto/list', ['casillas'=>$votos]);
+        return $pdf->save(storage_path('app/public/') . 'votos.pdf');
+
+
+    }
     public function index()
     {
         /* $votos = Voto::all();
