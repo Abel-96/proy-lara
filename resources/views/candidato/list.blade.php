@@ -45,5 +45,9 @@
 		@endforeach
 	</tbody>
 </table>
-<div>
+<p>
+<a href="{{route('candidatos.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Candidatos en PDF
+ </a>
+</p>
 @endsection

@@ -43,7 +43,9 @@ Route::resource('funcionariocasilla', FuncionariocasillaController::class);
 Route::resource('imeiautorizado', ImeiautorizadoController::class);
 
 
-Route::post('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
+Route::get('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
+Route::get('candidato/pdf', 'CandidatoController@generatepdf')->name('candidatos.pdf');
+
 
 
 

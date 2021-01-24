@@ -39,13 +39,10 @@ onclick="return confirm('Esta seguro de borrar {{$casilla->ubicacion}}')" >Del</
 @endforeach
 </tbody>
 </table>
-<div>
-<div>
 <p>
- <a href="{{route('casillas.pdf') }}" class="btn btn-sm btn-primary">
+<a href="{{route('casillas.pdf') }}" class="btn btn-sm btn-primary">
             Descargar Casilas en PDF
  </a>
 </p>
-</div>
-
+ 
 @endsection

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Candidato;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade as PDF; 
 class CandidatoController extends Controller
 {
 /**
@@ -10,6 +11,15 @@ class CandidatoController extends Controller
 *
 * @return \Illuminate\Http\Response
 */
+public function generatepdf()
+    {
+        $casillas = Candidato::all();
+        $pdf = PDF::loadView('candidato/list', ['candidatos'=>$casillas]);
+        return $pdf->save(storage_path('app/public/') . 'candidatos.pdf');
+
+
+    }
+
 public function index()
 {
 	$candidatos = Candidato::all();

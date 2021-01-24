@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Casilla;
-use Barryvdh\DomPDF\Facade as PDF; //--- Se agregó esta línea
+use Barryvdh\DomPDF\Facade as PDF; 
 class CasillaController extends Controller
 {
     /**
