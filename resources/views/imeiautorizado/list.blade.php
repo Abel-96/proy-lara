@@ -46,4 +46,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('imeiautorizados.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Imeiautorizados en PDF
+ </a>
+</p>
 @endsection

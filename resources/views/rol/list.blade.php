@@ -40,4 +40,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('roles.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Roles en PDF
+ </a>
+</p>
 @endsection

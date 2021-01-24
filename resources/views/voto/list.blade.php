@@ -44,4 +44,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('votos.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Votos en PDF
+ </a>
+</p>
 @endsection

@@ -41,9 +41,9 @@ Route::resource('funcionariocasilla', FuncionariocasillaController::class);
 Route::resource('imeiautorizado', ImeiautorizadoController::class);
 
 
-Route::get('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
-Route::get('candidatos/pdf', 'CandidatoController@generatepdf')->name('candidatos.pdf');
-Route::get('funcionari/.pdf', 'FuncionarioController@generatepdf')->name('funcionarios.pdf');
+Route::post('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
+Route::get('candidato/pdf', 'CandidatoController@generatepdf')->name('candidatos.pdf');
+Route::get('funcionario/.pdf', 'FuncionarioController@generatepdf')->name('funcionarios.pdf');
 Route::get('eleccioncomite/pdf', 'EleccioncomiteController@generatepdf')->name('eleccioncomites.pdf');
 Route::get('eleccion/pdf', 'EleccionController@generatepdf')->name('elecciones.pdf');
 Route::get('rol/pdf', 'RolController@generatepdf')->name('roles.pdf');

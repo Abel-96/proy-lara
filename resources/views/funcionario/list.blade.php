@@ -42,4 +42,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('funcionarios.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Funcionarios en PDF
+ </a>
+</p>
 @endsection

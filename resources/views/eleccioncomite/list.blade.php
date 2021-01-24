@@ -44,6 +44,11 @@
         </tbody>
     </table>
     <div>
+    <p>
+<a href="{{route('eleccioncomites.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Eleccionescomite en PDF
+ </a>
+</p>
 
     
         @endsection

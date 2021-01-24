@@ -46,4 +46,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('funcionariocasillas.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Funcionariocasillas en PDF
+ </a>
+</p>
 @endsection

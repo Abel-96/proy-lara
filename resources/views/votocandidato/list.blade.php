@@ -42,4 +42,9 @@
 	</tbody>
 </table>
 <div>
+<p>
+<a href="{{route('votocandidatos.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar Votocandidatos en PDF
+ </a>
+</p>
 @endsection
