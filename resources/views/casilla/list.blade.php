@@ -46,3 +46,4 @@ onclick="return confirm('Esta seguro de borrar {{$casilla->ubicacion}}')" >Del</
 </p>
  
 @endsection
+@section('scripts')

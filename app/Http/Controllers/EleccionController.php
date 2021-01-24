@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Eleccion;
-
+use Barryvdh\DomPDF\Facade as PDF; 
 class EleccionController extends Controller
 {
     /**

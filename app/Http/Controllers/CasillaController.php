@@ -15,7 +15,7 @@ class CasillaController extends Controller
     {
         $casillas = Casilla::all();
         $pdf = PDF::loadView('casilla/list', ['casillas'=>$casillas]);
-        return $pdf->save(storage_path('app/public/') . 'casillas.pdf');
+        return $pdf->save(storage_path('app/public/') . 'casilla.pdf');
 
 
     }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Rol;
 use App\Models\Eleccion;
 use App\Models\Funcionario;
-
+use Barryvdh\DomPDF\Facade as PDF;
 class EleccioncomiteController extends Controller
 {
     /**
@@ -16,6 +16,14 @@ class EleccioncomiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $eleccioncomites = Eleccioncomite::all();
+        $pdf = PDF::loadView('eleccioncomite/list', ['eleccioncomite'=>$eleccioncomites]);
+        return $pdf->save(storage_path('app/public/') . 'eleccioncomite.pdf');
+
+
+    }
     public function index()
     {
        /*

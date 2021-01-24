@@ -24,9 +24,7 @@ use App\Http\Controllers\VotocandidatoController;
 use App\Http\Controllers\FuncionariocasillaController;
 use App\Http\Controllers\ImeiautorizadoController;
 
-
-
-
+use function Ramsey\Uuid\v1;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,7 +42,17 @@ Route::resource('imeiautorizado', ImeiautorizadoController::class);
 
 
 Route::get('casilla/pdf', 'CasillaController@generatepdf')->name('casillas.pdf');
-Route::get('candidato/pdf', 'CandidatoController@generatepdf')->name('candidatos.pdf');
+Route::get('candidatos/pdf', 'CandidatoController@generatepdf')->name('candidatos.pdf');
+Route::get('funcionari/.pdf', 'FuncionarioController@generatepdf')->name('funcionarios.pdf');
+Route::get('eleccioncomite/pdf', 'EleccioncomiteController@generatepdf')->name('eleccioncomites.pdf');
+Route::get('eleccion/pdf', 'EleccionController@generatepdf')->name('elecciones.pdf');
+Route::get('rol/pdf', 'RolController@generatepdf')->name('roles.pdf');
+Route::get('voto/pdf', 'VotoController@generatepdf')->name('votos.pdf');
+Route::get('votocandidato/pdf', 'VotocandidatoController@generatepdf')->name('votocandidatos.pdf');
+Route::get('funcionariocasilla/pdf', ' FuncionariocasillaController@generatepdf')->name('funcionariocasillas.pdf');
+Route::get('imeiautorizado/pdf', 'ImeiautorizadoController@generatepdf')->name('imeiautorizados.pdf');
+
+
 
 
 
